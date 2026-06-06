@@ -68,9 +68,7 @@ export function JobCard({
     onDragStart(job);
   };
 
-  const handleDragEnd = () => {
-    // Optional: Add any cleanup if needed
-  };
+  const handleDragEnd = () => { };
 
   return (
     <article

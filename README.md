@@ -1,34 +1,127 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# JobPilot
+
+A modern job application tracking system built with Next.js 16, React 19, and TypeScript. JobPilot helps you manage your job search workflow with an intuitive interface for tracking applications, statuses, priorities, and salaries.
+
+## Features
+
+- **Job Tracking**: Track job applications through multiple stages (Interested → Applied → Interview → Technical Interview → Offer/Rejected)
+- **Priority Management**: Set job priorities (Low, Medium, High) with visual indicators
+- **Salary Visualization**: Color-coded salary ranges for quick assessment
+- **Drag & Drop Reordering**: Organize your job list with intuitive drag-and-drop functionality
+- **Dashboard Statistics**: Real-time overview of your job search progress
+- **Local Storage Persistence**: All data persists locally in the browser
+- **Responsive Design**: Fully responsive UI built with Tailwind CSS v4
+- **Type Safety**: Full TypeScript coverage for robust development
+
+## Tech Stack
+
+- **Framework**: Next.js (App Router)
+- **UI Library**: React
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS v4
+- **State Management**: Custom implementation using `useSyncExternalStore` with localStorage
+
+## Architecture Highlights
+
+### State Management
+The application uses a custom state management pattern leveraging React's `useSyncExternalStore` hook for optimal performance and SSR compatibility. This approach provides:
+- Efficient re-renders through selective subscriptions
+- Server-side rendering support with server snapshots
+- Type-safe state operations
+- Local storage persistence
+
+### Component Structure
+```
+app/
+├── layout.tsx          # Root layout with global styles
+└── page.tsx            # Home page entry point
+
+components/
+├── app-header.tsx      # Application header
+├── dashboard-stats.tsx # Statistics overview
+├── home-page.tsx       # Main page composition
+├── jobs/               # Job-related components
+│   ├── job-card.tsx    # Individual job display
+│   ├── job-form.tsx    # Create/edit form
+│   └── jobs-section.tsx# Jobs list with filters
+└── ui/                 # Reusable UI components
+
+hooks/
+└── use-jobs.ts         # Custom hook for job state
+
+lib/
+├── constants.ts        # Application constants
+├── job-storage.ts      # Local storage utilities
+├── jobs-store.ts       # State management logic
+└── types.ts            # TypeScript definitions
+```
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+- Node.js 18+ 
+- npm, yarn, pnpm, or bun
 
+### Installation
+
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd jobpilot
+```
+
+2. Install dependencies:
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+```
+
+3. Run the development server:
 ```bash
 npm run dev
 # or
 yarn dev
 # or
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Available Scripts
 
-## Learn More
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm start` - Start production server
+- `npm run lint` - Run ESLint
 
-To learn more about Next.js, take a look at the following resources:
+## Usage
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Add jobs via the "Add Job" button, edit/delete using card buttons, change status via dropdown, and reorder by dragging (desktop). Dashboard shows real-time statistics.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Development Notes
 
-## Deploy on Vercel
+### Custom State Management
+The project implements a custom store pattern using `useSyncExternalStore` instead of external state management libraries. This demonstrates understanding of React's latest APIs and provides a lightweight, performant solution.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Type Safety
+All components and utilities are fully typed with TypeScript, including:
+- Job interfaces with optional fields
+- Status and priority union types
+- Component prop types
+- Store action signatures
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Styling Approach
+Tailwind CSS v4 is used with a custom utility system in `lib/ui.ts` for consistent theming and maintainability.
+
+## Future Enhancements
+
+- [ ] Supabase integration
+- [ ] Authentication
+- [ ] Export/import functionality
+
+## License
+
+This project is private and intended for personal use.
