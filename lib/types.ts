@@ -6,6 +6,8 @@ export type JobStatus =
   | "Offer"
   | "Rejected";
 
+export type JobPriority = "Low" | "Medium" | "High";
+
 export type Job = {
   id: string;
   company: string;
@@ -14,6 +16,8 @@ export type Job = {
   status: JobStatus;
   notes?: string;
   createdAt: string;
+  appliedDate?: string;
+  priority?: JobPriority;
 };
 
 export type DashboardStats = {

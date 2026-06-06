@@ -1,4 +1,4 @@
-import type { JobStatus } from "./types";
+import type { JobPriority, JobStatus } from "./types";
 
 export const JOBS_STORAGE_KEY = "jobpilot-jobs";
 
@@ -10,3 +10,5 @@ export const JOB_STATUSES: JobStatus[] = [
   "Offer",
   "Rejected",
 ];
+
+export const JOB_PRIORITIES: JobPriority[] = ["Low", "Medium", "High"];

@@ -1,4 +1,4 @@
-import { JOB_STATUSES } from "./constants";
+import { JOB_PRIORITIES, JOB_STATUSES } from "./constants";
 import type { JobFormData } from "./job-actions";
 
 const companies = [
@@ -27,13 +27,13 @@ const positions = [
   "Mobile Developer",
 ];
 
-const salaries = [
-  "$60k–$80k",
-  "$80k–$100k",
-  "$90k",
-  "$100k–$120k",
-  "$110k–$130k",
-  "$120k+",
+const salaryRanges = [
+  { min: 60, max: 80 },
+  { min: 80, max: 100 },
+  { min: 90, max: 90 },
+  { min: 100, max: 120 },
+  { min: 110, max: 130 },
+  { min: 120, max: 150 },
 ];
 
 const notes = [
@@ -54,12 +54,15 @@ function maybe<T>(items: T[], chance = 0.6): T | undefined {
 }
 
 export function generateRandomJob(): JobFormData {
+  const salaryRange = maybe(salaryRanges, 0.8);
   return {
     company: pick(companies),
     position: pick(positions),
-    salary: maybe(salaries),
+    minSalary: salaryRange ? salaryRange.min.toString() : undefined,
+    maxSalary: salaryRange ? salaryRange.max.toString() : undefined,
     status: pick(JOB_STATUSES),
     notes: maybe(notes),
+    priority: pick(JOB_PRIORITIES),
   };
 }
 

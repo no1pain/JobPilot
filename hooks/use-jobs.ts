@@ -9,6 +9,7 @@ import {
   editJob,
   getJobsServerSnapshot,
   getJobsSnapshot,
+  reorderJobs,
   subscribeToJobs,
   updateJobStatus,
 } from "@/lib/jobs-store";
@@ -28,5 +29,6 @@ export function useJobs() {
     editJob,
     deleteJob,
     updateStatus: updateJobStatus,
+    reorderJobs,
   };
 }

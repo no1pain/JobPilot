@@ -1,8 +1,8 @@
-import type { Job, JobStatus } from "./types";
+import type { Job, JobPriority } from "./types";
 
 export type JobFilters = {
   search: string;
-  status: JobStatus | "all";
+  priority: JobPriority | "all";
 };
 
 export function filterJobs(jobs: Job[], filters: JobFilters): Job[] {
@@ -14,9 +14,9 @@ export function filterJobs(jobs: Job[], filters: JobFilters): Job[] {
       job.company.toLowerCase().includes(query) ||
       job.position.toLowerCase().includes(query);
 
-    const matchesStatus =
-      filters.status === "all" || job.status === filters.status;
+    const matchesPriority =
+      filters.priority === "all" || job.priority === filters.priority;
 
-    return matchesSearch && matchesStatus;
+    return matchesSearch && matchesPriority;
   });
 }

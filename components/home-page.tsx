@@ -14,6 +14,7 @@ export function HomePage() {
     editJob,
     deleteJob,
     updateStatus,
+    reorderJobs,
   } = useJobs();
 
   return (
@@ -31,6 +32,7 @@ export function HomePage() {
             onEdit={editJob}
             onDelete={deleteJob}
             onStatusChange={updateStatus}
+            onReorder={reorderJobs}
           />
         </div>
       </main>

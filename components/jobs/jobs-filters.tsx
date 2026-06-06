@@ -1,9 +1,9 @@
 "use client";
 
-import { JOB_STATUSES } from "@/lib/constants";
+import { JOB_PRIORITIES } from "@/lib/constants";
 import type { JobFilters } from "@/lib/filter-jobs";
 import { ui } from "@/lib/ui";
-import type { JobStatus } from "@/lib/types";
+import type { JobPriority } from "@/lib/types";
 
 type JobsFiltersProps = {
   filters: JobFilters;
@@ -25,21 +25,21 @@ export function JobsFilters({ filters, onChange }: JobsFiltersProps) {
       </label>
 
       <label className="sm:w-52">
-        <span className="sr-only">Filter by status</span>
+        <span className="sr-only">Filter by priority</span>
         <select
-          value={filters.status}
+          value={filters.priority}
           onChange={(e) =>
             onChange({
               ...filters,
-              status: e.target.value as JobStatus | "all",
+              priority: e.target.value as JobPriority | "all",
             })
           }
           className={ui.input}
         >
-          <option value="all">All statuses</option>
-          {JOB_STATUSES.map((status) => (
-            <option key={status} value={status}>
-              {status}
+          <option value="all">All priorities</option>
+          {JOB_PRIORITIES.map((priority) => (
+            <option key={priority} value={priority}>
+              {priority}
             </option>
           ))}
         </select>

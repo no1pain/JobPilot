@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent, type MouseEvent } from "react";
 import { Button } from "@/components/ui/button";
-import { JOB_STATUSES } from "@/lib/constants";
+import { JOB_STATUSES, JOB_PRIORITIES } from "@/lib/constants";
 import type { JobFormData } from "@/lib/job-actions";
 import { ui } from "@/lib/ui";
 import type { Job } from "@/lib/types";
@@ -16,9 +16,12 @@ type JobFormProps = {
 const emptyForm: JobFormData = {
   company: "",
   position: "",
-  salary: "",
+  minSalary: "",
+  maxSalary: "",
   status: "Interested",
   notes: "",
+  appliedDate: "",
+  priority: "Medium",
 };
 
 export function JobForm({ job, onSubmit, onCancel }: JobFormProps) {
@@ -27,9 +30,12 @@ export function JobForm({ job, onSubmit, onCancel }: JobFormProps) {
       ? {
           company: job.company,
           position: job.position,
-          salary: job.salary ?? "",
+          minSalary: job.salary ? job.salary.split("-")[0].replace(/\$|k/g, "").trim() : "",
+          maxSalary: job.salary ? job.salary.split("-")[1]?.replace(/\$|k/g, "").trim() || job.salary.split("-")[0].replace(/\$|k/g, "").trim() : "",
           status: job.status,
           notes: job.notes ?? "",
+          appliedDate: job.appliedDate ?? "",
+          priority: job.priority ?? "Medium",
         }
       : emptyForm,
   );
@@ -87,15 +93,29 @@ export function JobForm({ job, onSubmit, onCancel }: JobFormProps) {
             />
           </label>
 
-          <label className="block">
-            <span className={ui.label}>Salary</span>
-            <input
-              value={form.salary}
-              onChange={(e) => setForm({ ...form, salary: e.target.value })}
-              placeholder="e.g. $80k–$100k"
-              className={ui.input}
-            />
-          </label>
+          <div className="flex gap-3">
+            <label className="flex-1 block">
+              <span className={ui.label}>Min Salary (k)</span>
+              <input
+                type="number"
+                value={form.minSalary}
+                onChange={(e) => setForm({ ...form, minSalary: e.target.value })}
+                placeholder="e.g. 80"
+                className={ui.input}
+              />
+            </label>
+    
+            <label className="flex-1 block">
+              <span className={ui.label}>Max Salary (k)</span>
+              <input
+                type="number"
+                value={form.maxSalary}
+                onChange={(e) => setForm({ ...form, maxSalary: e.target.value })}
+                placeholder="e.g. 100"
+                className={ui.input}
+              />
+            </label>
+          </div>
 
           <label className="block">
             <span className={ui.label}>Status</span>
@@ -125,6 +145,36 @@ export function JobForm({ job, onSubmit, onCancel }: JobFormProps) {
               rows={3}
               className={`${ui.input} resize-none`}
             />
+          </label>
+
+          <label className="block">
+            <span className={ui.label}>Applied Date</span>
+            <input
+              type="date"
+              value={form.appliedDate}
+              onChange={(e) => setForm({ ...form, appliedDate: e.target.value })}
+              className={ui.input}
+            />
+          </label>
+
+          <label className="block">
+            <span className={ui.label}>Priority</span>
+            <select
+              value={form.priority}
+              onChange={(e) =>
+                setForm({
+                  ...form,
+                  priority: e.target.value as JobFormData["priority"],
+                })
+              }
+              className={ui.input}
+            >
+              {JOB_PRIORITIES.map((priority) => (
+                <option key={priority} value={priority}>
+                  {priority}
+                </option>
+              ))}
+            </select>
           </label>
         </div>
 

@@ -38,8 +38,10 @@ export function getJobsSnapshot(): Job[] {
   return getJobs();
 }
 
+const SERVER_SNAPSHOT: Job[] = [];
+
 export function getJobsServerSnapshot(): Job[] {
-  return [];
+  return SERVER_SNAPSHOT;
 }
 
 export function createJob(data: JobFormData) {
@@ -64,4 +66,8 @@ export function deleteJob(id: string) {
 
 export function updateJobStatus(id: string, status: JobStatus) {
   setJobs(changeJobStatus(getJobs(), id, status));
+}
+
+export function reorderJobs(reorderedJobs: Job[]) {
+  setJobs(reorderedJobs);
 }
