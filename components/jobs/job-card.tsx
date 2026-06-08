@@ -68,8 +68,6 @@ export function JobCard({
     onDragStart(job);
   };
 
-  const handleDragEnd = () => { };
-
   return (
     <article
       className={`${ui.card} p-4 transition-colors hover:border-zinc-700 overflow-hidden relative`}

@@ -28,20 +28,32 @@ export function JobForm({ job, onSubmit, onCancel }: JobFormProps) {
   const [form, setForm] = useState<JobFormData>(
     job
       ? {
-          company: job.company,
-          position: job.position,
-          minSalary: job.salary ? job.salary.split("-")[0].replace(/\$|k/g, "").trim() : "",
-          maxSalary: job.salary ? job.salary.split("-")[1]?.replace(/\$|k/g, "").trim() || job.salary.split("-")[0].replace(/\$|k/g, "").trim() : "",
-          status: job.status,
-          notes: job.notes ?? "",
-          appliedDate: job.appliedDate ?? "",
-          priority: job.priority ?? "Medium",
-        }
+        company: job.company,
+        position: job.position,
+        minSalary: job.salary ? job.salary.split("-")[0].replace(/\$|k/g, "").trim() : "",
+        maxSalary: job.salary ? job.salary.split("-")[1]?.replace(/\$|k/g, "").trim() || job.salary.split("-")[0].replace(/\$|k/g, "").trim() : "",
+        status: job.status,
+        notes: job.notes ?? "",
+        appliedDate: job.appliedDate ?? "",
+        priority: job.priority ?? "Medium",
+      }
       : emptyForm,
   );
+  const [salaryError, setSalaryError] = useState("");
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    if (form.minSalary && form.maxSalary) {
+      const min = parseFloat(form.minSalary);
+      const max = parseFloat(form.maxSalary);
+      if (min > max) {
+        setSalaryError("Min salary cannot be greater than max salary");
+        return;
+      }
+    }
+
+    setSalaryError("");
     onSubmit(form);
   }
 
@@ -99,23 +111,32 @@ export function JobForm({ job, onSubmit, onCancel }: JobFormProps) {
               <input
                 type="number"
                 value={form.minSalary}
-                onChange={(e) => setForm({ ...form, minSalary: e.target.value })}
+                onChange={(e) => {
+                  setForm({ ...form, minSalary: e.target.value });
+                  setSalaryError("");
+                }}
                 placeholder="e.g. 80"
                 className={ui.input}
               />
             </label>
-    
+
             <label className="flex-1 block">
               <span className={ui.label}>Max Salary (k)</span>
               <input
                 type="number"
                 value={form.maxSalary}
-                onChange={(e) => setForm({ ...form, maxSalary: e.target.value })}
+                onChange={(e) => {
+                  setForm({ ...form, maxSalary: e.target.value });
+                  setSalaryError("");
+                }}
                 placeholder="e.g. 100"
                 className={ui.input}
               />
             </label>
           </div>
+          {salaryError && (
+            <p className="text-sm text-red-400">{salaryError}</p>
+          )}
 
           <label className="block">
             <span className={ui.label}>Status</span>
