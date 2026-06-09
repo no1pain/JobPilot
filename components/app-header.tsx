@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { SettingsDialog } from "@/components/settings/settings-dialog";
+import { SettingsPopup } from "@/components/settings/settings-dialog";
 
 export function AppHeader() {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
@@ -16,15 +16,17 @@ export function AppHeader() {
               Track your job applications
             </p>
           </div>
-          <button
-            onClick={() => setIsSettingsOpen(true)}
-            className="rounded-md border border-[var(--border)] bg-[var(--muted)] px-4 py-2 text-sm text-[var(--card-foreground)] hover:bg-[var(--border)] transition-colors"
-          >
-            ⚙️ Settings
-          </button>
+          <div className="relative">
+            <button
+              onClick={() => setIsSettingsOpen(!isSettingsOpen)}
+              className="rounded-md border border-[var(--border)] bg-[var(--muted)] px-4 py-2 text-sm text-[var(--card-foreground)] hover:bg-[var(--border)] transition-colors"
+            >
+              ⚙️ Settings
+            </button>
+            <SettingsPopup isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} />
+          </div>
         </div>
       </header>
-      <SettingsDialog isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} />
     </>
   );
 }
