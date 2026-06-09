@@ -166,9 +166,9 @@ export function JobsSection({
           action={
             hasActiveFilters
               ? {
-                  label: "Clear filters",
-                  onClick: () => setFilters(defaultFilters),
-                }
+                label: "Clear filters",
+                onClick: () => setFilters(defaultFilters),
+              }
               : undefined
           }
         />
@@ -179,23 +179,22 @@ export function JobsSection({
             return (
               <div
                 key={status}
-                className={`space-y-3 transition-colors ${
-                  dragOverStatus === status
-                    ? "bg-zinc-800/50 border-zinc-600"
+                className={`space-y-3 transition-colors ${dragOverStatus === status
+                    ? "bg-[var(--muted)]/50 border-[var(--muted-foreground)]"
                     : ""
-                }`}
+                  }`}
                 onDragOver={(e) => handleDragOver(e, status)}
                 onDragLeave={handleDragLeave}
                 onDrop={() => handleDrop(status)}
               >
-                <div className="border-b border-zinc-800 pb-2">
-                  <h3 className="font-semibold text-zinc-100">
+                <div className="border-b border-[var(--border)] pb-2">
+                  <h3 className="font-semibold text-[var(--card-foreground)]">
                     {status} ({statusJobs.length})
                   </h3>
                 </div>
                 {statusJobs.length === 0 ? (
                   <>
-                    <p className="text-sm text-zinc-500">No jobs</p>
+                    <p className="text-sm text-[var(--muted-foreground)]">No jobs</p>
                     {dragOverStatus === status && draggedJob && (
                       <div className="min-w-[280px] max-w-[280px] opacity-50">
                         <JobCard

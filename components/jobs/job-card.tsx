@@ -70,10 +70,10 @@ export function JobCard({
 
   return (
     <article
-      className={`${ui.card} p-4 transition-colors hover:border-zinc-700 overflow-hidden relative`}
+      className={`${ui.card} p-4 transition-colors hover:border-[var(--muted-foreground)] overflow-hidden relative`}
     >
       <div
-        className="absolute top-2 right-2 cursor-grab text-zinc-500 hover:text-zinc-300 hidden lg:block"
+        className="absolute top-2 right-2 cursor-grab text-[var(--muted-foreground)] hover:text-[var(--foreground)] hidden lg:block"
         draggable
         onDragStart={handleDragStart}
       >
@@ -114,7 +114,7 @@ export function JobCard({
               onStatusChange(job.id, e.target.value as JobStatus)
             }
             aria-label={`Change status for ${job.position}`}
-            className={`flex-1 min-w-[100px] rounded border bg-zinc-950 px-2 py-1.5 text-xs outline-none transition-colors focus:ring-1 focus:ring-zinc-500/40 ${statusStyle.select}`}
+            className={`flex-1 min-w-[100px] rounded border border-[var(--border)] bg-[var(--background)] px-2 py-1.5 text-xs text-[var(--foreground)] outline-none transition-colors focus:ring-1 focus:ring-[var(--muted-foreground)]/40 ${statusStyle.select}`}
           >
             {JOB_STATUSES.map((status) => (
               <option key={status} value={status}>

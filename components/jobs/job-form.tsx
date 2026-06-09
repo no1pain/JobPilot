@@ -75,8 +75,8 @@ export function JobForm({ job, onSubmit, onCancel }: JobFormProps) {
         onSubmit={handleSubmit}
         className={`w-full max-w-lg ${ui.card} shadow-2xl shadow-black/50`}
       >
-        <div className="flex items-center justify-between border-b border-zinc-800 px-6 py-4">
-          <h3 id="job-form-title" className="text-lg font-semibold text-zinc-50">
+        <div className="flex items-center justify-between border-b border-[var(--border)] px-6 py-4">
+          <h3 id="job-form-title" className="text-lg font-semibold text-[var(--card-foreground)]">
             {job ? "Edit vacancy" : "Add vacancy"}
           </h3>
           <Button variant="ghost" size="sm" onClick={onCancel} aria-label="Close">
@@ -199,13 +199,13 @@ export function JobForm({ job, onSubmit, onCancel }: JobFormProps) {
           </label>
         </div>
 
-        <div className="flex justify-end gap-3 border-t border-zinc-800 px-6 py-4">
+        <div className="flex justify-end gap-3 border-t border-[var(--border)] px-6 py-4">
           <Button variant="secondary" onClick={onCancel}>
             Cancel
           </Button>
           <button
             type="submit"
-            className="inline-flex items-center justify-center rounded-lg bg-zinc-100 px-4 py-2 text-sm font-medium text-zinc-950 transition-colors hover:bg-white"
+            className="inline-flex items-center justify-center rounded-lg bg-[var(--foreground)] px-4 py-2 text-sm font-medium text-[var(--background)] transition-colors hover:bg-[var(--muted-foreground)]"
           >
             {job ? "Save changes" : "Add vacancy"}
           </button>

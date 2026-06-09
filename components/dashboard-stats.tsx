@@ -14,9 +14,9 @@ export function DashboardStats({ stats }: DashboardStatsProps) {
         {statCards.map(({ key, label, cardClass, valueClass }) => (
           <div
             key={key}
-            className={`rounded-xl border p-4 ${cardClass}`}
+            className={`rounded-xl border border-[var(--border)] bg-[var(--card)] p-4 ${cardClass}`}
           >
-            <p className="text-xs font-medium text-zinc-400">{label}</p>
+            <p className="text-xs font-medium text-[var(--muted-foreground)]">{label}</p>
             <p className={`mt-1 text-2xl font-bold tabular-nums ${valueClass}`}>
               {stats[key]}
             </p>
