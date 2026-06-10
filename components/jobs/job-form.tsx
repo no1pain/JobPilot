@@ -6,6 +6,7 @@ import { JOB_STATUSES, JOB_PRIORITIES } from "@/lib/constants";
 import type { JobFormData } from "@/lib/job-actions";
 import { ui } from "@/lib/ui";
 import type { Job } from "@/lib/types";
+import { useTranslation } from "@/lib/translations-context";
 
 type JobFormProps = {
   job?: Job;
@@ -25,6 +26,7 @@ const emptyForm: JobFormData = {
 };
 
 export function JobForm({ job, onSubmit, onCancel }: JobFormProps) {
+  const { t } = useTranslation();
   const [form, setForm] = useState<JobFormData>(
     job
       ? {
@@ -48,7 +50,7 @@ export function JobForm({ job, onSubmit, onCancel }: JobFormProps) {
       const min = parseFloat(form.minSalary);
       const max = parseFloat(form.maxSalary);
       if (min > max) {
-        setSalaryError("Min salary cannot be greater than max salary");
+        setSalaryError(t("form.salaryError"));
         return;
       }
     }
@@ -77,7 +79,7 @@ export function JobForm({ job, onSubmit, onCancel }: JobFormProps) {
       >
         <div className="flex items-center justify-between border-b border-[var(--border)] px-6 py-4">
           <h3 id="job-form-title" className="text-lg font-semibold text-[var(--card-foreground)]">
-            {job ? "Edit vacancy" : "Add vacancy"}
+            {job ? t("form.editVacancy") : t("form.addVacancy")}
           </h3>
           <Button variant="ghost" size="sm" onClick={onCancel} aria-label="Close">
             ✕
@@ -86,7 +88,7 @@ export function JobForm({ job, onSubmit, onCancel }: JobFormProps) {
 
         <div className="space-y-4 px-6 py-5">
           <label className="block">
-            <span className={ui.label}>Company</span>
+            <span className={ui.label}>{t("form.company")}</span>
             <input
               required
               value={form.company}
@@ -96,7 +98,7 @@ export function JobForm({ job, onSubmit, onCancel }: JobFormProps) {
           </label>
 
           <label className="block">
-            <span className={ui.label}>Position</span>
+            <span className={ui.label}>{t("form.position")}</span>
             <input
               required
               value={form.position}
@@ -107,7 +109,7 @@ export function JobForm({ job, onSubmit, onCancel }: JobFormProps) {
 
           <div className="flex gap-3">
             <label className="flex-1 block">
-              <span className={ui.label}>Min Salary (k)</span>
+              <span className={ui.label}>{t("form.minSalary")}</span>
               <input
                 type="number"
                 value={form.minSalary}
@@ -121,7 +123,7 @@ export function JobForm({ job, onSubmit, onCancel }: JobFormProps) {
             </label>
 
             <label className="flex-1 block">
-              <span className={ui.label}>Max Salary (k)</span>
+              <span className={ui.label}>{t("form.maxSalary")}</span>
               <input
                 type="number"
                 value={form.maxSalary}
@@ -139,7 +141,7 @@ export function JobForm({ job, onSubmit, onCancel }: JobFormProps) {
           )}
 
           <label className="block">
-            <span className={ui.label}>Status</span>
+            <span className={ui.label}>{t("form.status")}</span>
             <select
               value={form.status}
               onChange={(e) =>
@@ -159,7 +161,7 @@ export function JobForm({ job, onSubmit, onCancel }: JobFormProps) {
           </label>
 
           <label className="block">
-            <span className={ui.label}>Notes</span>
+            <span className={ui.label}>{t("form.notes")}</span>
             <textarea
               value={form.notes}
               onChange={(e) => setForm({ ...form, notes: e.target.value })}
@@ -169,7 +171,7 @@ export function JobForm({ job, onSubmit, onCancel }: JobFormProps) {
           </label>
 
           <label className="block">
-            <span className={ui.label}>Applied Date</span>
+            <span className={ui.label}>{t("form.appliedDate")}</span>
             <input
               type="date"
               value={form.appliedDate}
@@ -179,7 +181,7 @@ export function JobForm({ job, onSubmit, onCancel }: JobFormProps) {
           </label>
 
           <label className="block">
-            <span className={ui.label}>Priority</span>
+            <span className={ui.label}>{t("form.priority")}</span>
             <select
               value={form.priority}
               onChange={(e) =>
@@ -201,13 +203,13 @@ export function JobForm({ job, onSubmit, onCancel }: JobFormProps) {
 
         <div className="flex justify-end gap-3 border-t border-[var(--border)] px-6 py-4">
           <Button variant="secondary" onClick={onCancel}>
-            Cancel
+            {t("form.cancel")}
           </Button>
           <button
             type="submit"
             className="inline-flex items-center justify-center rounded-lg bg-[var(--foreground)] px-4 py-2 text-sm font-medium text-[var(--background)] transition-colors hover:bg-[var(--muted-foreground)]"
           >
-            {job ? "Save changes" : "Add vacancy"}
+            {job ? t("form.saveChanges") : t("form.addVacancy")}
           </button>
         </div>
       </form>

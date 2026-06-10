@@ -6,6 +6,7 @@ import { JOB_STATUSES } from "@/lib/constants";
 import { STATUS_STYLES } from "@/lib/status-styles";
 import { ui } from "@/lib/ui";
 import type { Job, JobStatus } from "@/lib/types";
+import { useTranslation } from "@/lib/translations-context";
 
 type JobCardProps = {
   job: Job;
@@ -22,12 +23,13 @@ export function JobCard({
   onStatusChange,
   onDragStart,
 }: JobCardProps) {
+  const { t, language } = useTranslation();
   const statusStyle = STATUS_STYLES[job.status];
 
   const formatDate = (dateString?: string) => {
     if (!dateString) return null;
     const date = new Date(dateString);
-    return date.toLocaleDateString("en-US", {
+    return date.toLocaleDateString(language === "uk" ? "uk-UA" : "en-US", {
       month: "short",
       day: "numeric",
       year: "numeric",
@@ -103,7 +105,7 @@ export function JobCard({
 
         {job.appliedDate && (
           <p className={`text-xs ${ui.textMuted} truncate`}>
-            Applied: {formatDate(job.appliedDate)}
+            {t("card.applied")} {formatDate(job.appliedDate)}
           </p>
         )}
 
@@ -129,7 +131,7 @@ export function JobCard({
             onClick={() => onEdit(job)}
             className="px-2 py-1.5 text-xs whitespace-nowrap"
           >
-            Edit
+            {t("card.edit")}
           </Button>
           <Button
             variant="danger"
@@ -137,7 +139,7 @@ export function JobCard({
             onClick={() => onDelete(job.id)}
             className="px-2 py-1.5 text-xs whitespace-nowrap"
           >
-            Delete
+            {t("card.delete")}
           </Button>
         </div>
       </div>

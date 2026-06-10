@@ -33,7 +33,29 @@
     "noMatches": "No matches found",
     "noMatchesDesc": "Try adjusting your search or status filter.",
     "clearFilters": "Clear filters",
-    "noJobs": "No jobs"
+    "noJobs": "No jobs",
+    "searchPlaceholder": "Search by company or position...",
+    "allPriorities": "All priorities"
+  },
+  "form": {
+    "editVacancy": "Edit vacancy",
+    "addVacancy": "Add vacancy",
+    "company": "Company",
+    "position": "Position",
+    "minSalary": "Min Salary (k)",
+    "maxSalary": "Max Salary (k)",
+    "status": "Status",
+    "notes": "Notes",
+    "appliedDate": "Applied Date",
+    "priority": "Priority",
+    "cancel": "Cancel",
+    "saveChanges": "Save changes",
+    "salaryError": "Min salary cannot be greater than max salary"
+  },
+  "card": {
+    "applied": "Applied:",
+    "edit": "Edit",
+    "delete": "Delete"
   },
   "common": {
     "add": "Add",
