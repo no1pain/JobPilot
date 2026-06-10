@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { SettingsProvider } from "@/lib/settings-context";
+import { SettingsModeProvider } from "@/components/settings-mode-provider";
 
 export const metadata: Metadata = {
   title: "JobPilot",
@@ -15,7 +17,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <SettingsProvider>
+          <SettingsModeProvider>
+            <ThemeProvider>{children}</ThemeProvider>
+          </SettingsModeProvider>
+        </SettingsProvider>
       </body>
     </html>
   );

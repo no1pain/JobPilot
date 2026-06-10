@@ -57,3 +57,59 @@ html.light textarea {
 ::-webkit-scrollbar-thumb:hover {
   background: #a1a1aa;
 }
+
+/* Compact Mode - reduces padding and spacing */
+body.compact-mode {
+  font-size: 0.9em;
+}
+
+body.compact-mode * {
+  padding-top: 0.75rem !important;
+  padding-bottom: 0.75rem !important;
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important;
+  margin-top: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
+  margin-left: 0.5rem !important;
+  margin-right: 0.5rem !important;
+}
+
+body.compact-mode .space-y-3 > * + * {
+  margin-top: 0.5rem !important;
+}
+
+/* No Animations - disables transitions and animations */
+body.no-animations *,
+body.no-animations *::before,
+body.no-animations *::after {
+  transition: none !important;
+  animation: none !important;
+}
+
+/* Party Mode - fun rainbow effects */
+body.party-mode {
+  animation: rainbow-bg 10s linear infinite;
+}
+
+@keyframes rainbow-bg {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+body.party-mode button:hover {
+  animation: party-pulse 0.5s ease-in-out infinite;
+}
+
+@keyframes party-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+body.party-mode .border-purple-500 {
+  animation: party-glow 1s ease-in-out infinite alternate;
+}
+
+@keyframes party-glow {
+  from { box-shadow: 0 0 5px #a855f7; }
+  to { box-shadow: 0 0 20px #a855f7, 0 0 30px #ec4899; }
+}

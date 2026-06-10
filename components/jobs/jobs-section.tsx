@@ -8,6 +8,7 @@ import { filterJobs, type JobFilters } from "@/lib/filter-jobs";
 import type { JobFormData } from "@/lib/job-actions";
 import { ui } from "@/lib/ui";
 import type { Job, JobStatus } from "@/lib/types";
+import { useTranslation } from "@/lib/translations-context";
 import { JobCard } from "./job-card";
 import { JobForm } from "./job-form";
 import { JobsFilters } from "./jobs-filters";
@@ -36,6 +37,7 @@ export function JobsSection({
   onStatusChange,
   onReorder,
 }: JobsSectionProps) {
+  const { t } = useTranslation();
   const [editingJob, setEditingJob] = useState<Job | null>(null);
   const [isAdding, setIsAdding] = useState(false);
   const [filters, setFilters] = useState<JobFilters>(defaultFilters);
@@ -140,12 +142,12 @@ export function JobsSection({
   return (
     <section className="w-full">
       <div className="mb-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <h2 className={ui.sectionTitle}>Vacancies</h2>
+        <h2 className={ui.sectionTitle}>{t("jobs.title")}</h2>
         <div className="flex flex-wrap gap-2">
           <Button variant="secondary" onClick={onAddRandom}>
-            Add 3 random
+            {t("jobs.addRandom")}
           </Button>
-          <Button onClick={openAddForm}>Add vacancy</Button>
+          <Button onClick={openAddForm}>{t("jobs.addVacancy")}</Button>
         </div>
       </div>
 
@@ -155,18 +157,18 @@ export function JobsSection({
 
       {jobs.length === 0 ? (
         <EmptyState
-          title="No vacancies yet"
-          description="Start tracking your job search by adding your first application."
-          action={{ label: "Add vacancy", onClick: openAddForm }}
+          title={t("jobs.noVacancies")}
+          description={t("jobs.noVacanciesDesc")}
+          action={{ label: t("jobs.addVacancy"), onClick: openAddForm }}
         />
       ) : filteredJobs.length === 0 ? (
         <EmptyState
-          title="No matches found"
-          description="Try adjusting your search or status filter."
+          title={t("jobs.noMatches")}
+          description={t("jobs.noMatchesDesc")}
           action={
             hasActiveFilters
               ? {
-                label: "Clear filters",
+                label: t("jobs.clearFilters"),
                 onClick: () => setFilters(defaultFilters),
               }
               : undefined
@@ -180,8 +182,8 @@ export function JobsSection({
               <div
                 key={status}
                 className={`space-y-3 transition-colors ${dragOverStatus === status
-                    ? "bg-[var(--muted)]/50 border-[var(--muted-foreground)]"
-                    : ""
+                  ? "bg-[var(--muted)]/50 border-[var(--muted-foreground)]"
+                  : ""
                   }`}
                 onDragOver={(e) => handleDragOver(e, status)}
                 onDragLeave={handleDragLeave}
@@ -194,7 +196,7 @@ export function JobsSection({
                 </div>
                 {statusJobs.length === 0 ? (
                   <>
-                    <p className="text-sm text-[var(--muted-foreground)]">No jobs</p>
+                    <p className="text-sm text-[var(--muted-foreground)]">{t("jobs.noJobs")}</p>
                     {dragOverStatus === status && draggedJob && (
                       <div className="min-w-[280px] max-w-[280px] opacity-50">
                         <JobCard

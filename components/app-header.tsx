@@ -2,9 +2,11 @@
 
 import { useState } from "react";
 import { SettingsPopup } from "@/components/settings/settings-dialog";
+import { useTranslation } from "@/lib/translations-context";
 
 export function AppHeader() {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const { t } = useTranslation();
 
   return (
     <>
@@ -21,7 +23,7 @@ export function AppHeader() {
               onClick={() => setIsSettingsOpen(!isSettingsOpen)}
               className="rounded-md border border-[var(--border)] bg-[var(--muted)] px-4 py-2 text-sm text-[var(--card-foreground)] hover:bg-[var(--border)] transition-colors"
             >
-              ⚙️ Settings
+              ⚙️ {t("header.settings")}
             </button>
             <SettingsPopup isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} />
           </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
+import { ReactNode } from "react";
 
 type Language = "uk" | "en";
 
@@ -10,6 +11,10 @@ const ANIMATIONS_KEY = "jobpilot-animations";
 const PARTY_MODE_KEY = "jobpilot-party-mode";
 
 const subscribers = new Set<() => void>();
+
+export function SettingsProvider({ children }: { children: ReactNode }) {
+  return <>{children}</>;
+}
 
 function getLanguage(): Language {
   if (typeof window === "undefined") return "uk";

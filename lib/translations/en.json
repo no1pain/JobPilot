@@ -1,0 +1,47 @@
+{
+  "settings": {
+    "title": "Settings",
+    "theme": "Theme",
+    "language": "Language",
+    "compactMode": "Compact Mode",
+    "animations": "Animations",
+    "partyMode": "Party Mode",
+    "on": "On",
+    "off": "Off"
+  },
+  "header": {
+    "dashboard": "Dashboard",
+    "jobs": "Jobs",
+    "settings": "Settings"
+  },
+  "dashboard": {
+    "title": "Dashboard"
+  },
+  "stats": {
+    "total": "Total vacancies",
+    "applied": "Applied",
+    "interview": "Interview",
+    "offer": "Offer",
+    "rejected": "Rejected"
+  },
+  "jobs": {
+    "title": "Vacancies",
+    "addVacancy": "Add vacancy",
+    "addRandom": "Add 3 random",
+    "noVacancies": "No vacancies yet",
+    "noVacanciesDesc": "Start tracking your job search by adding your first application.",
+    "noMatches": "No matches found",
+    "noMatchesDesc": "Try adjusting your search or status filter.",
+    "clearFilters": "Clear filters",
+    "noJobs": "No jobs"
+  },
+  "common": {
+    "add": "Add",
+    "edit": "Edit",
+    "delete": "Delete",
+    "save": "Save",
+    "cancel": "Cancel",
+    "search": "Search",
+    "filter": "Filter"
+  }
+}
